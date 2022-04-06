@@ -14,3 +14,14 @@ theme= 'hugo-theme-shell'
 	Hi I'm Anastasia!
 	My friends call me Stayge
 	"""
+	[Params.Tree]
+  	use = true
+ 	 folderName = "my_activity"
+  	# Note: ["ACTIVITY", "URL or PATH TO YOUR MARKDOWN FILE"]
+  	files = [ 
+    	["Write Ups", "https://www.example.com/"],
+    	["Interests", "https://www.example.com/"],
+    	["Go", "https://golang.org/"],
+    	["Hugo", "/post/some-activity.md"],
+    	["Docker", "/post/some-activity.md"],
+  	]
