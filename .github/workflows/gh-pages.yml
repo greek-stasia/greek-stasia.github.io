@@ -1,9 +1,9 @@
-name: github pages
+name: Github Pages
 
 on:
   push:
     branches:
-      - main  # Set a branch to deploy
+      - main
   pull_request:
 
 jobs:
@@ -18,7 +18,7 @@ jobs:
       - name: Setup Hugo
         uses: peaceiris/actions-hugo@v2
         with:
-          hugo-version: 'latest'
+          hugo-version: '0.83.0'
           extended: true
 
       - name: Build
@@ -26,7 +26,7 @@ jobs:
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
-        if: github.ref == 'refs/heads/main'
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          deploy_key: ${{ secrets.PRIVATE_KEY }}
+          external_repository: greek-stasia/greek-stasia.github.io
           publish_dir: ./public
