@@ -30,4 +30,5 @@ jobs:
         with:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           external_repository: greek-stasia/greek-stasia.github.io
+          publish_branch: gh-pages
           publish_dir: ./stayge/public
