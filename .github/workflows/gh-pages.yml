@@ -22,7 +22,7 @@ jobs:
           extended: true
 
       - name: Build
-        run: hugo --config stayge/config.toml --minify --themesDir stayge/themes
+        run: hugo  --minify
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
@@ -31,4 +31,4 @@ jobs:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
           external_repository: greek-stasia/greek-stasia.github.io
           publish_branch: gh-pages
-          publish_dir: ./stayge/public
+          publish_dir: ./public

@@ -1,12 +1,3 @@
-[submodule "hugo-theme-shell"]
-	path = hugo-theme-shell
-	url = git@github.com:Yukuro/hugo-theme-shell.git
-[submodule "somrat"]
-	path = somrat
-	url = git@github.com:somratpro/somrat.git
-[submodule "stayge/somrat"]
-	path = stayge/somrat
-	url = git@github.com:somratpro/somrat.git
 [submodule "stayge/themes/hugo-theme-shell"]
 	path = stayge/themes/hugo-theme-shell
 	url = https://github.com/Yukuro/hugo-theme-shell.git
