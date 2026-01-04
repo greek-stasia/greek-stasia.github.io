@@ -48,7 +48,7 @@
         // Create toggle button
         const toggleBtn = document.createElement('button');
         toggleBtn.id = 'terminal-toggle';
-        toggleBtn.innerHTML = '$';
+        toggleBtn.innerHTML = '>_';
         toggleBtn.title = 'Open Terminal (Ctrl+`)';
         toggleBtn.onclick = toggleTerminal;
 
