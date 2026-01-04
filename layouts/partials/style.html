@@ -8,7 +8,10 @@
 {{ end }}
 
 {{ $terminal_style := resources.Get "sass/white.scss" }}
-{{/*  {{ with (eq .Site.Params.Terminal.scheme "monokai") }} {{- $terminal_style = resources.Get "sass/monokai.scss" | css.Sass | minify -}} {{ end }}  */}}
+{{ with (eq .Site.Params.Terminal.scheme "Molokai") }}
+    {{- $terminal_style = resources.Get "sass/monokai.scss" | css.Sass | minify -}}
+    {{- $terminal_style = $terminal_style.Content -}}
+{{ end }}
 {{ with (eq .Site.Params.Terminal.scheme "shell-powershell") }}
     {{- $terminal_style = resources.Get "sass/powershell.scss" | css.Sass | minify -}}
     {{- $terminal_style = $terminal_style.Content -}}
@@ -27,13 +30,28 @@
 {{ end }}
 {{/*  {{ with (eq .Site.Params.Terminal.scheme "goph") }} {{- $terminal_style = resources.Get "sass/goph.scss" | css.Sass | minify -}} {{ end }}  */}}
 
-{{/*  Assume that ubuntu and retro do not exist in gogh.  */}}
-{{ $themeDataResource := resources.GetRemote "https://raw.githubusercontent.com/Mayccoll/Gogh/master/data/themes.json" }}
-{{ with $themeDataResource }}
-    {{ $themeData := . | transform.Unmarshal }}
-    {{ range $t := $themeData.themes }}
-        {{if eq $t.name $.Site.Params.Terminal.scheme }}
-            {{ $terminal_style = printf "body{background:%s}body #terminal{color:%s}body #user{color:%s}body #dir{color:%s}body .Typewriter__cursor{color:%s}a{color:%s}" $t.background $t.cursorColor $t.green $t.blue $t.cursorColor $t.cursorColor | safeCSS }}
+{{/*  Molokai, ubuntu and retro are handled by local SCSS files above.
+      Only fetch from Gogh if using other themes.  */}}
+{{ $localThemes := slice "Molokai" "shell-powershell" "shell-ubuntu" "shell-retro" }}
+{{ if not (in $localThemes $.Site.Params.Terminal.scheme) }}
+    {{ $themeDataResource := resources.GetRemote "https://raw.githubusercontent.com/Mayccoll/Gogh/master/data/themes.json" }}
+    {{ with $themeDataResource }}
+        {{ with .Err }}
+            {{/* Silently fail if remote fetch fails */}}
+        {{ else }}
+            {{ $themeData := $themeDataResource | transform.Unmarshal }}
+            {{/* Handle both array and object with "themes" field */}}
+            {{ $themes := $themeData }}
+            {{ if reflect.IsMap $themeData }}
+                {{ with index $themeData "themes" }}
+                    {{ $themes = . }}
+                {{ end }}
+            {{ end }}
+            {{ range $t := $themes }}
+                {{if eq $t.name $.Site.Params.Terminal.scheme }}
+                    {{ $terminal_style = printf "body{background:%s}body #terminal{color:%s}body #user{color:%s}body #dir{color:%s}body .Typewriter__cursor{color:%s}a{color:%s}" $t.background $t.cursorColor $t.green $t.blue $t.cursorColor $t.cursorColor | safeCSS }}
+                {{ end }}
+            {{ end }}
         {{ end }}
     {{ end }}
 {{ end }}
