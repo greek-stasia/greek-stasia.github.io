@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en{{ end }}">
+    {{- partial "head.html" . -}}
+    <body>
+        {{- partial "header.html" . -}}
+        <div id="content">
+        {{- block "main" . }}{{- end }}
+        </div>
+        {{- partial "footer.html" . -}}
+
+        <!--  Additions start here -->
+
+        {{ if .Site.Params.Navbar.use }}
+            {{- partial "navbar.html" . -}}
+        {{ end }}
+
+        <!-- Interactive terminal scripts - load on homepage only -->
+        {{ if .IsHome }}
+        <link rel="stylesheet" href="/css/interactive-terminal.css">
+        <script src="/js/interactive-terminal.js"></script>
+        {{ end }}
+
+        <!-- Additions stop here -->
+    </body>
+</html>

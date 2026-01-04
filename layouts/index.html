@@ -50,12 +50,6 @@
     {{ $stdoutDelay :=  $.Site.Params.Terminal.stdoutDelay }}
     {{ $commandDelay := $.Site.Params.Terminal.commandDelay }}
 
-    <!-- Include interactive terminal CSS -->
-    <link rel="stylesheet" href="/css/interactive-terminal.css">
-
     {{ partial "typeIndex.html" (dict "context" . "env" $env "cd" $cd "envWithDir" $envWithDir "cat" $cat "description" $description "tree" $tree "leaf" $leaf "ps1delay" $ps1Delay "stdoutdelay" $stdoutDelay "commanddelay" $commandDelay ) }}
-
-    <!-- Include interactive terminal JavaScript -->
-    <script src="/js/interactive-terminal.js"></script>
 
 {{ end }}
