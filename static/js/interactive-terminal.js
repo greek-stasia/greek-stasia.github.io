@@ -295,11 +295,15 @@
         const content = document.getElementById('content');
         if (!content) return;
 
-        const output = document.createElement('div');
-        output.className = 'terminal-output';
+        // Use <span id="terminal"> to match theme styling
+        const output = document.createElement('span');
+        output.id = 'terminal';
+        output.style.display = 'block';
+        output.style.whiteSpace = 'pre-wrap';
         output.textContent = text;
 
         content.appendChild(output);
+        content.appendChild(document.createElement('br'));
         window.scrollTo(0, document.body.scrollHeight);
     }
 
@@ -307,11 +311,16 @@
         const content = document.getElementById('content');
         if (!content) return;
 
-        const error = document.createElement('div');
-        error.className = 'terminal-error';
+        // Use <span id="terminal"> with red color for errors
+        const error = document.createElement('span');
+        error.id = 'terminal';
+        error.style.display = 'block';
+        error.style.whiteSpace = 'pre-wrap';
+        error.style.color = '#f92672'; // Monokai red
         error.textContent = message;
 
         content.appendChild(error);
+        content.appendChild(document.createElement('br'));
         window.scrollTo(0, document.body.scrollHeight);
     }
 
