@@ -1,4 +1,4 @@
-baseURL = 'https://greek-stasia.github.io'
+baseURL = 'https://stayge.us'
 languageCode = 'en-us'
 title = 'StaygeLabs'
 theme= 'hugo-theme-shell'
