@@ -8,7 +8,6 @@
     let navData = {};
     let commandHistory = [];
     let historyIndex = -1;
-    let promptCount = 0;
 
     // Initialize terminal
     async function initTerminal() {
@@ -34,13 +33,13 @@
     // Wait for typewriter animation to complete
     function waitForAnimation() {
         return new Promise((resolve) => {
-            // Check if animation is done by looking for the final prompt
+            // Check if the last prompt (ps1_04) has been populated
             const checkInterval = setInterval(() => {
-                const terminalContainer = document.querySelector('.shell-body');
-                if (terminalContainer && terminalContainer.innerText.includes('$')) {
+                const lastPrompt = document.getElementById('ps1_04');
+                if (lastPrompt && lastPrompt.innerHTML && lastPrompt.innerHTML.length > 0) {
                     clearInterval(checkInterval);
                     // Wait a bit more to ensure everything is rendered
-                    setTimeout(resolve, 500);
+                    setTimeout(resolve, 300);
                 }
             }, 100);
 
@@ -140,9 +139,9 @@
 
     // Clear terminal
     function clearTerminal() {
-        const shellBody = document.querySelector('.shell-body');
-        if (shellBody) {
-            shellBody.innerHTML = '';
+        const content = document.getElementById('content');
+        if (content) {
+            content.innerHTML = '';
         }
         addInteractivePrompt();
     }
@@ -176,9 +175,14 @@
             }
         });
 
+        // Keep focus on input
+        input.focus();
+
         // Prevent losing focus
-        input.addEventListener('blur', function() {
-            setTimeout(() => input.focus(), 0);
+        document.addEventListener('click', () => {
+            if (input && !input.disabled) {
+                input.focus();
+            }
         });
     }
 
@@ -201,37 +205,46 @@
 
     // DOM manipulation helpers
     function addInteractivePrompt() {
-        const shellBody = document.querySelector('.shell-body');
-        if (!shellBody) return;
+        const content = document.getElementById('content');
+        if (!content) return;
 
         const promptDiv = createPromptElement();
-        shellBody.appendChild(promptDiv);
+        content.appendChild(promptDiv);
 
         const input = promptDiv.querySelector('input');
         if (input) {
-            input.focus();
             setupInputHandlers(input);
+            input.focus();
         }
 
         // Scroll to bottom
-        shellBody.scrollTop = shellBody.scrollHeight;
+        window.scrollTo(0, document.body.scrollHeight);
     }
 
     function createPromptElement() {
         const container = document.createElement('div');
         container.className = 'prompt-line';
 
-        // Get prompt info from config or use defaults
-        const userName = document.querySelector('#user')?.textContent || 'user';
-        const pcName = document.querySelector('#user')?.parentElement?.textContent?.split('@')[1]?.split(':')[0] || 'host';
+        // Get prompt info from existing elements
+        const userSpan = document.querySelector('#user');
+        const userName = userSpan ? userSpan.textContent : 'user';
+
+        // Extract pc name from the existing prompt
+        const ps1Element = document.getElementById('ps1_04');
+        let pcName = 'host';
+        if (ps1Element) {
+            const match = ps1Element.innerHTML.match(/@([^:]+):/);
+            if (match) pcName = match[1];
+        }
 
         container.innerHTML = `
+            <br>
             <strong>
-                <span id="user" style="color: var(--base0B)">${userName}</span>
+                <span style="color: var(--base0B)">${userName}</span>
                 <span style="color: var(--base07)">@</span>
                 <span style="color: var(--base0B)">${pcName}</span>
                 <span style="color: var(--base07)">:</span>
-                <span id="dir" style="color: var(--base0D)">~</span>
+                <span style="color: var(--base0D)">~</span>
             </strong>
             <span style="color: var(--base07)">$ </span>
             <input type="text" id="terminal-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
@@ -241,38 +254,29 @@
     }
 
     function appendOutput(text) {
-        const shellBody = document.querySelector('.shell-body');
-        if (!shellBody) return;
+        const content = document.getElementById('content');
+        if (!content) return;
 
-        const output = document.createElement('span');
-        output.id = 'terminal';
-        output.style.display = 'block';
+        const output = document.createElement('div');
         output.style.whiteSpace = 'pre-wrap';
-        output.innerHTML = escapeHtml(text).replace(/\n/g, '<br>');
+        output.style.fontFamily = 'inherit';
+        output.textContent = text;
 
-        shellBody.appendChild(output);
-        shellBody.scrollTop = shellBody.scrollHeight;
+        content.appendChild(output);
+        window.scrollTo(0, document.body.scrollHeight);
     }
 
     function showError(message) {
-        const shellBody = document.querySelector('.shell-body');
-        if (!shellBody) return;
+        const content = document.getElementById('content');
+        if (!content) return;
 
-        const error = document.createElement('span');
-        error.id = 'terminal';
-        error.style.color = 'var(--base08)';
-        error.style.display = 'block';
+        const error = document.createElement('div');
+        error.style.color = 'var(--base08, #ff5555)';
+        error.style.whiteSpace = 'pre-wrap';
         error.textContent = message;
 
-        shellBody.appendChild(error);
-        shellBody.scrollTop = shellBody.scrollHeight;
-    }
-
-    // Utility functions
-    function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
+        content.appendChild(error);
+        window.scrollTo(0, document.body.scrollHeight);
     }
 
     // Initialize when DOM is ready
