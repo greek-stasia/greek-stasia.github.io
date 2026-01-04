@@ -14,11 +14,9 @@
             {{- partial "navbar.html" . -}}
         {{ end }}
 
-        <!-- Interactive terminal scripts - load on homepage only -->
-        {{ if .IsHome }}
-        <link rel="stylesheet" href="/css/interactive-terminal.css">
-        <script src="/js/interactive-terminal.js"></script>
-        {{ end }}
+        <!-- Floating persistent terminal - loads on all pages -->
+        <link rel="stylesheet" href="/css/floating-terminal.css">
+        <script src="/js/floating-terminal.js"></script>
 
         <!-- Additions stop here -->
     </body>

@@ -1,0 +1,198 @@
+/* Floating Terminal Overlay */
+
+#floating-terminal {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50vh;
+  background: #1b1d1e;
+  border-top: 2px solid #23e298;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+  transform: translateY(100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+#floating-terminal.open {
+  transform: translateY(0);
+}
+
+#floating-terminal.minimized {
+  height: 40px;
+  transform: translateY(0);
+}
+
+/* Terminal header bar */
+.terminal-header {
+  background: #272822;
+  color: #bbbbbb;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #3e3d32;
+  user-select: none;
+  cursor: move;
+  flex-shrink: 0;
+}
+
+.terminal-title {
+  font-family: 'Inconsolata', monospace;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.terminal-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.terminal-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.terminal-btn:hover {
+  opacity: 0.8;
+}
+
+.terminal-btn.minimize {
+  background: #f5a623;
+}
+
+.terminal-btn.maximize {
+  background: #23e298;
+}
+
+.terminal-btn.close {
+  background: #f92672;
+}
+
+/* Terminal content area */
+.terminal-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px;
+  font-family: 'Inconsolata', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #bbbbbb;
+}
+
+#floating-terminal.minimized .terminal-content {
+  display: none;
+}
+
+/* Terminal toggle button (when closed) */
+#terminal-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: #23e298;
+  color: #1b1d1e;
+  border: none;
+  border-radius: 50%;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(35, 226, 152, 0.4);
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  font-family: 'Inconsolata', monospace;
+}
+
+#terminal-toggle:hover {
+  background: #2affa7;
+  box-shadow: 0 6px 16px rgba(35, 226, 152, 0.6);
+  transform: scale(1.1);
+}
+
+#terminal-toggle.hidden {
+  display: none;
+}
+
+/* Keyboard shortcut hint */
+.terminal-hint {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  background: rgba(39, 40, 34, 0.95);
+  color: #bbbbbb;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: 'Inconsolata', monospace;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 9997;
+  pointer-events: none;
+}
+
+.terminal-hint.show {
+  opacity: 1;
+}
+
+/* Scrollbar styling for terminal */
+.terminal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.terminal-content::-webkit-scrollbar-track {
+  background: #1b1d1e;
+}
+
+.terminal-content::-webkit-scrollbar-thumb {
+  background: #3e3d32;
+  border-radius: 4px;
+}
+
+.terminal-content::-webkit-scrollbar-thumb:hover {
+  background: #5e5d52;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  #floating-terminal {
+    height: 60vh;
+  }
+
+  #terminal-toggle {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+    bottom: 15px;
+    right: 15px;
+  }
+
+  .terminal-hint {
+    display: none;
+  }
+}
+
+/* Resizer handle */
+.terminal-resizer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  cursor: ns-resize;
+  background: transparent;
+  z-index: 10;
+}
+
+.terminal-resizer:hover {
+  background: #23e298;
+}
