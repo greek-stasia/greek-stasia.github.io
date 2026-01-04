@@ -162,6 +162,33 @@
   background: #5e5d52;
 }
 
+/* Input field styling - no white background! */
+.prompt-line input {
+  background: transparent !important;
+  border: none !important;
+  outline: none !important;
+  color: #bbbbbb !important;
+  font-family: 'Inconsolata', monospace;
+  font-size: inherit;
+  caret-color: #23e298;
+  padding: 0;
+  margin: 0;
+  box-shadow: none !important;
+}
+
+.prompt-line input:focus {
+  background: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Prompt line styling */
+.prompt-line {
+  display: flex;
+  align-items: baseline;
+  color: #bbbbbb;
+}
+
 /* Mobile adjustments */
 @media (max-width: 768px) {
   #floating-terminal {

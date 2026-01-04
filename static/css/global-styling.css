@@ -1,0 +1,69 @@
+/* Global styling for consistent white font across all pages */
+
+body {
+  color: #bbbbbb !important;
+  background-color: #272822;
+}
+
+#content {
+  color: #bbbbbb !important;
+}
+
+/* Ensure all terminal output uses light gray text */
+#terminal {
+  color: #bbbbbb !important;
+}
+
+/* Paragraph and text elements */
+p, span, div {
+  color: #bbbbbb;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #bbbbbb !important;
+}
+
+/* Links should be distinguishable */
+a {
+  color: #66D9EF;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #23e298;
+  text-decoration: underline;
+}
+
+/* Code blocks */
+code, pre {
+  color: #bbbbbb;
+  background-color: #1b1d1e;
+}
+
+/* List items */
+ul, ol, li {
+  color: #bbbbbb;
+}
+
+/* Ensure strong/bold text is visible */
+strong, b {
+  color: #bbbbbb;
+  font-weight: bold;
+}
+
+/* Table styling if present */
+table {
+  color: #bbbbbb;
+}
+
+th, td {
+  color: #bbbbbb;
+}
+
+/* Blockquotes */
+blockquote {
+  color: #bbbbbb;
+  border-left: 3px solid #23e298;
+  padding-left: 15px;
+}

@@ -71,8 +71,28 @@
                 </div>
             </div>
             <div class="terminal-content" id="floating-content">
-                <span id="terminal">Welcome to StaygeLabs Terminal</span><br>
-                <span id="terminal">Type 'help' for available commands</span><br>
+                <span id="terminal">╔═══════════════════════════════════════════════════════════╗</span><br>
+                <span id="terminal">║           Welcome to StaygeLabs Terminal                 ║</span><br>
+                <span id="terminal">╚═══════════════════════════════════════════════════════════╝</span><br>
+                <br>
+                <span id="terminal">This terminal is persistent across all pages!</span><br>
+                <br>
+                <span id="terminal" style="color: #23e298">Getting Started:</span><br>
+                <span id="terminal">  • Type 'help' to see all available commands</span><br>
+                <span id="terminal">  • Type 'ls' to list sections you can visit</span><br>
+                <span id="terminal">  • Type 'cd blog' to navigate to the blog</span><br>
+                <span id="terminal">  • Type 'clear' to clear the terminal screen</span><br>
+                <br>
+                <span id="terminal" style="color: #d08010">Terminal Controls:</span><br>
+                <span id="terminal">  • Press Ctrl+\` to open/close terminal</span><br>
+                <span id="terminal">  • Press Escape to close terminal</span><br>
+                <span id="terminal">  • Use ↑/↓ arrow keys for command history</span><br>
+                <span id="terminal">  • Drag top edge to resize terminal</span><br>
+                <span id="terminal">  • Click window controls: 🟡 minimize  🟢 maximize  🔴 close</span><br>
+                <br>
+                <span id="terminal" style="color: #f92672">Pro Tip:</span><br>
+                <span id="terminal">  Your command history persists as you navigate pages!</span><br>
+                <span id="terminal">  Try 'cd blog' then 'cd about' - the terminal stays with you.</span><br>
                 <br>
             </div>
         `;

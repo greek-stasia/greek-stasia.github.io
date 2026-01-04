@@ -2,6 +2,9 @@
 <html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en{{ end }}">
     {{- partial "head.html" . -}}
     <body>
+        <!-- Global styling for consistent white font -->
+        <link rel="stylesheet" href="/css/global-styling.css">
+
         {{- partial "header.html" . -}}
         <div id="content">
         {{- block "main" . }}{{- end }}
