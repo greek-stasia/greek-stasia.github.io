@@ -17,6 +17,7 @@
 #terminal-input:focus {
   outline: none;
   border: none;
+  background: transparent;
 }
 
 /* Prompt line container */
@@ -25,6 +26,7 @@
   align-items: baseline;
   margin: 0;
   line-height: 1.5;
+  color: var(--base05, #f8f8f2);
 }
 
 .prompt-line input {
@@ -35,6 +37,22 @@
 /* User input display (after command is executed) */
 .user-input {
   color: var(--base05, #f8f8f2);
+}
+
+/* Terminal output text - match theme colors */
+.terminal-output {
+  color: var(--base05, #f8f8f2);
+  white-space: pre-wrap;
+  font-family: 'Inconsolata', monospace;
+  margin: 0;
+}
+
+/* Terminal error text */
+.terminal-error {
+  color: var(--base08, #f92672);
+  white-space: pre-wrap;
+  font-family: 'Inconsolata', monospace;
+  margin: 0;
 }
 
 /* Terminal output spacing */

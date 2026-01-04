@@ -296,8 +296,7 @@
         if (!content) return;
 
         const output = document.createElement('div');
-        output.style.whiteSpace = 'pre-wrap';
-        output.style.fontFamily = 'inherit';
+        output.className = 'terminal-output';
         output.textContent = text;
 
         content.appendChild(output);
@@ -309,8 +308,7 @@
         if (!content) return;
 
         const error = document.createElement('div');
-        error.style.color = 'var(--base08, #ff5555)';
-        error.style.whiteSpace = 'pre-wrap';
+        error.className = 'terminal-error';
         error.textContent = message;
 
         content.appendChild(error);
