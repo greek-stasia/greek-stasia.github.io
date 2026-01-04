@@ -1,0 +1,34 @@
+{
+  "commands": {
+    "help": {
+      "description": "Show available commands",
+      "usage": "help"
+    },
+    "ls": {
+      "description": "List available sections",
+      "usage": "ls"
+    },
+    "cd": {
+      "description": "Navigate to a section",
+      "usage": "cd <section>",
+      "options": ["about", "blog", "projects", "writeups", "home"]
+    },
+    "clear": {
+      "description": "Clear the terminal",
+      "usage": "clear"
+    }
+  },
+  "navigation": {
+    "about": "/",
+    "home": "/",
+    "blog": "/posts/",
+    "projects": "/posts/projects/",
+    "writeups": "/posts/writeups/"
+  },
+  "sections": [
+    {"name": "about", "description": "About me and this portfolio"},
+    {"name": "blog", "description": "Blog posts and articles"},
+    {"name": "projects", "description": "Software projects and experiments"},
+    {"name": "writeups", "description": "Technical write-ups and CTF solutions"}
+  ]
+}

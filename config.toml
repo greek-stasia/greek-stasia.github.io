@@ -6,22 +6,28 @@ theme= 'hugo-theme-shell'
 	description = "StaygeLabs"
 	[Params.Terminal]
 	scheme = "Molokai"
-	userName="user"
+	userName="stayge"
 	pcName="staygelabs"
 	workDir="stayge"
 	profile = "profile"
 	description = """
-	Hi I'm Anastasia!
-	My friends call me Stayge
+	Hi, I'm Anastasia!
+	My friends call me Stayge.
+
+	I'm a software engineer and security enthusiast.
+	I enjoy reverse engineering, CTFs, and building cool projects.
+
+	Type 'help' to see available commands.
 	"""
 	[Params.Tree]
   	use = true
- 	 folderName = "my_activity"
+ 	 folderName = "portfolio"
   	# Note: ["ACTIVITY", "URL or PATH TO YOUR MARKDOWN FILE"]
-  	files = [ 
-    	["Write Ups", "https://www.example.com/"],
-    	["Interests", "https://www.example.com/"],
-    	["Go", "https://golang.org/"],
-    	["Hugo", "/post/some-activity.md"],
-    	["Docker", "/post/some-activity.md"],
+  	files = [
+    	["About", "/"],
+    	["Blog", "/posts/"],
+    	["GitHub", "https://github.com/greek-stasia"],
+    	["LinkedIn", "https://linkedin.com/in/your-profile"],
+    	["Projects", "/posts/projects/"],
+    	["Write-ups", "/posts/writeups/"],
   	]

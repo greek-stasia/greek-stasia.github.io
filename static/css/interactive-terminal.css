@@ -1,0 +1,75 @@
+/* Interactive Terminal Styles */
+
+/* Terminal input field */
+#terminal-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--base05, #f8f8f2);
+  font-family: 'Inconsolata', monospace;
+  font-size: inherit;
+  width: 100%;
+  caret-color: var(--base05, #f8f8f2);
+  padding: 0;
+  margin: 0;
+}
+
+#terminal-input:focus {
+  outline: none;
+  border: none;
+}
+
+/* Prompt line container */
+.prompt-line {
+  display: flex;
+  align-items: baseline;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.prompt-line input {
+  flex: 1;
+  min-width: 0;
+}
+
+/* User input display (after command is executed) */
+.user-input {
+  color: var(--base05, #f8f8f2);
+}
+
+/* Terminal output spacing */
+#terminal {
+  margin: 0;
+  padding: 0;
+  line-height: 1.5;
+}
+
+/* Ensure proper scrolling */
+.shell-body {
+  overflow-y: auto;
+  max-height: 80vh;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  #terminal-input {
+    font-size: 14px;
+  }
+
+  .shell-body {
+    max-height: 70vh;
+  }
+}
+
+/* Accessibility: ensure input is visible when focused */
+#terminal-input:focus {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Prevent text selection on prompt decorations */
+.prompt-line strong {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
