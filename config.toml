@@ -1,4 +1,4 @@
-baseURL = 'https://stayge.us'
+baseURL = 'https://stayge.dev'
 languageCode = 'en-us'
 title = 'StaygeLabs'
 theme= 'hugo-theme-shell'
