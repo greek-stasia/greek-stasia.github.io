@@ -4,6 +4,8 @@
 (function() {
     'use strict';
 
+    console.log('[Terminal] Script loaded');
+
     // Terminal state
     let navData = {};
     let commandHistory = [];
@@ -11,32 +13,46 @@
 
     // Initialize terminal
     async function initTerminal() {
+        console.log('[Terminal] Initializing...');
         try {
             // Fetch navigation structure
+            console.log('[Terminal] Fetching navigation data from /data/terminal-nav.json');
             const response = await fetch('/data/terminal-nav.json');
+            console.log('[Terminal] Fetch response:', response.status, response.ok);
+
             if (!response.ok) {
-                console.error('Failed to load terminal navigation data');
+                console.error('[Terminal] Failed to load terminal navigation data:', response.status);
                 return;
             }
             navData = await response.json();
+            console.log('[Terminal] Navigation data loaded:', navData);
 
             // Wait for the typewriter animation to complete
+            console.log('[Terminal] Waiting for typewriter animation...');
             await waitForAnimation();
+            console.log('[Terminal] Animation complete');
 
             // Add interactive prompt
+            console.log('[Terminal] Adding interactive prompt');
             addInteractivePrompt();
+            console.log('[Terminal] Terminal ready!');
         } catch (error) {
-            console.error('Error initializing terminal:', error);
+            console.error('[Terminal] Error initializing terminal:', error);
         }
     }
 
     // Wait for typewriter animation to complete
     function waitForAnimation() {
         return new Promise((resolve) => {
+            console.log('[Terminal] Looking for ps1_04 element...');
             // Check if the last prompt (ps1_04) has been populated
             const checkInterval = setInterval(() => {
                 const lastPrompt = document.getElementById('ps1_04');
+                if (lastPrompt) {
+                    console.log('[Terminal] Found ps1_04, innerHTML length:', lastPrompt.innerHTML.length);
+                }
                 if (lastPrompt && lastPrompt.innerHTML && lastPrompt.innerHTML.length > 0) {
+                    console.log('[Terminal] ps1_04 is populated, animation complete');
                     clearInterval(checkInterval);
                     // Wait a bit more to ensure everything is rendered
                     setTimeout(resolve, 300);
@@ -45,6 +61,7 @@
 
             // Timeout after 10 seconds
             setTimeout(() => {
+                console.log('[Terminal] Animation wait timeout after 10 seconds');
                 clearInterval(checkInterval);
                 resolve();
             }, 10000);
@@ -61,6 +78,7 @@
 
     // Handle command input
     function handleCommand(input) {
+        console.log('[Terminal] Handling command:', input);
         const trimmed = input.trim();
         if (!trimmed) {
             addInteractivePrompt();
@@ -73,11 +91,14 @@
 
         // Parse command
         const [cmd, ...args] = trimmed.split(' ');
+        console.log('[Terminal] Parsed command:', cmd, 'args:', args);
 
         // Execute
         if (commands[cmd]) {
+            console.log('[Terminal] Executing command:', cmd);
             commands[cmd](args);
         } else {
+            console.log('[Terminal] Unknown command:', cmd);
             showError(`Command not found: ${cmd}. Type 'help' for available commands.`);
             addInteractivePrompt();
         }
@@ -93,6 +114,7 @@
 
         const section = args[0].toLowerCase();
         const url = navData.navigation[section];
+        console.log('[Terminal] Navigating to section:', section, 'url:', url);
 
         if (url) {
             appendOutput(`Navigating to ${section}...`);
@@ -108,6 +130,7 @@
 
     // List sections
     function listSections() {
+        console.log('[Terminal] Listing sections');
         if (!navData.sections || navData.sections.length === 0) {
             showError("No sections available.");
             addInteractivePrompt();
@@ -126,6 +149,7 @@
 
     // Show help
     function showHelp() {
+        console.log('[Terminal] Showing help');
         let output = 'Available commands:\n\n';
 
         for (const [cmd, info] of Object.entries(navData.commands)) {
@@ -139,6 +163,7 @@
 
     // Clear terminal
     function clearTerminal() {
+        console.log('[Terminal] Clearing terminal');
         const content = document.getElementById('content');
         if (content) {
             content.innerHTML = '';
@@ -148,10 +173,12 @@
 
     // Input handling
     function setupInputHandlers(input) {
+        console.log('[Terminal] Setting up input handlers');
         input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 e.preventDefault();
                 const command = input.value;
+                console.log('[Terminal] Enter pressed, command:', command);
 
                 // Display the command in the terminal
                 const promptLine = input.closest('.prompt-line');
@@ -177,6 +204,7 @@
 
         // Keep focus on input
         input.focus();
+        console.log('[Terminal] Input focused');
 
         // Prevent losing focus
         document.addEventListener('click', () => {
@@ -205,16 +233,24 @@
 
     // DOM manipulation helpers
     function addInteractivePrompt() {
+        console.log('[Terminal] Adding interactive prompt');
         const content = document.getElementById('content');
-        if (!content) return;
+        if (!content) {
+            console.error('[Terminal] Content element not found!');
+            return;
+        }
 
         const promptDiv = createPromptElement();
         content.appendChild(promptDiv);
+        console.log('[Terminal] Prompt added to DOM');
 
         const input = promptDiv.querySelector('input');
         if (input) {
+            console.log('[Terminal] Input field found, setting up handlers');
             setupInputHandlers(input);
             input.focus();
+        } else {
+            console.error('[Terminal] Input field not found in prompt!');
         }
 
         // Scroll to bottom
@@ -228,6 +264,7 @@
         // Get prompt info from existing elements
         const userSpan = document.querySelector('#user');
         const userName = userSpan ? userSpan.textContent : 'user';
+        console.log('[Terminal] Creating prompt with username:', userName);
 
         // Extract pc name from the existing prompt
         const ps1Element = document.getElementById('ps1_04');
@@ -236,6 +273,7 @@
             const match = ps1Element.innerHTML.match(/@([^:]+):/);
             if (match) pcName = match[1];
         }
+        console.log('[Terminal] PC name:', pcName);
 
         container.innerHTML = `
             <br>
@@ -280,9 +318,12 @@
     }
 
     // Initialize when DOM is ready
+    console.log('[Terminal] Document readyState:', document.readyState);
     if (document.readyState === 'loading') {
+        console.log('[Terminal] Waiting for DOMContentLoaded');
         document.addEventListener('DOMContentLoaded', initTerminal);
     } else {
+        console.log('[Terminal] DOM already loaded, initializing immediately');
         initTerminal();
     }
 })();
