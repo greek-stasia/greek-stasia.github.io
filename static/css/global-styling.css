@@ -16,7 +16,7 @@ body {
 
 /* Paragraph and text elements */
 p, span, div {
-  color: #bbbbbb;
+  color: #bbbbbb !important;
 }
 
 /* Headings */
@@ -26,44 +26,72 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Links should be distinguishable */
 a {
-  color: #66D9EF;
+  color: #66D9EF !important;
   text-decoration: none;
 }
 
 a:hover {
-  color: #23e298;
+  color: #23e298 !important;
   text-decoration: underline;
 }
 
 /* Code blocks */
 code, pre {
-  color: #bbbbbb;
-  background-color: #1b1d1e;
+  color: #bbbbbb !important;
+  background-color: #1b1d1e !important;
 }
 
 /* List items */
 ul, ol, li {
-  color: #bbbbbb;
+  color: #bbbbbb !important;
 }
 
 /* Ensure strong/bold text is visible */
 strong, b {
-  color: #bbbbbb;
+  color: #bbbbbb !important;
   font-weight: bold;
 }
 
 /* Table styling if present */
 table {
-  color: #bbbbbb;
+  color: #bbbbbb !important;
 }
 
 th, td {
-  color: #bbbbbb;
+  color: #bbbbbb !important;
 }
 
 /* Blockquotes */
 blockquote {
-  color: #bbbbbb;
+  color: #bbbbbb !important;
   border-left: 3px solid #23e298;
   padding-left: 15px;
+}
+
+/* Article and main content */
+article, main, section {
+  color: #bbbbbb !important;
+}
+
+/* Ensure text content is white */
+.content, .post-content, .page-content {
+  color: #bbbbbb !important;
+}
+
+/* Override any dark/black text */
+* {
+  color: inherit;
+}
+
+body * {
+  color: #bbbbbb !important;
+}
+
+/* But preserve link colors */
+a, a * {
+  color: #66D9EF !important;
+}
+
+a:hover, a:hover * {
+  color: #23e298 !important;
 }
